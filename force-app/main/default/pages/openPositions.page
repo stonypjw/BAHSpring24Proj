@@ -1,0 +1,25 @@
+<apex:page standardController="Position__c" recordSetVar="positions">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>GenWatt Open Positions</title>
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+
+    <body>
+        <h1 class="slds-text-heading_large">GenWatt Open Positions</h1>
+    <apex:pageblock>
+        <ul class="slds-has-dividers_top-space">
+        <apex:repeat var="p" value="{!positions}" rendered="true" id="position_list">
+            <li class="slds-item">
+                <!-- <a href="{!$Site.BaseUrl}/{!p.Id}" target="_blank">Try this link: {!p.Name}</a> -->
+                 <apex:outputLink value="/{!p.Id}" > 
+                    {!p.Name} - {!p.Status__c} Position. This app closes {!p.Due_Date__c}
+                 </apex:outputLink>
+            </li>
+        </apex:repeat>
+        </ul>
+    </apex:pageblock>
+     </body>
+</apex:page
