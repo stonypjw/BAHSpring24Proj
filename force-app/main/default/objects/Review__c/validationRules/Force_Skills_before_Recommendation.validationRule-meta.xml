@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Force_Skills_before_Recommendation</fullName>
+    <active>true</active>
+    <errorConditionFormula>Recommend_for_Hire__c &amp;&amp; (ISBLANK(TEXT( Business_Skills__c)) || ISBLANK(TEXT( Cultural_Fit__c)) || ISBLANK(TEXT( Technical_Skills__c )))</errorConditionFormula>
+    <errorDisplayField>Recommend_for_Hire__c</errorDisplayField>
+    <errorMessage>You must select a score for Technical Skills, Business Skills, and Cultural Fit before you can Recommend for Hire.</errorMessage>
+</ValidationRule>

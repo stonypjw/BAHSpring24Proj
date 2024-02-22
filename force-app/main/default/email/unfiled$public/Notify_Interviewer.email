@@ -1,0 +1,5 @@
+{!Interviewer__c.Interviewer__c},
+
+You have been assigned as an interviewer for the {!Interviewer__c.Position__c} position.
+
+Click here for more details: {!Interviwer__c.Link}

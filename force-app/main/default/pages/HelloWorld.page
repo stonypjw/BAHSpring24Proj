@@ -1,0 +1,17 @@
+<apex:page lightningStylesheets="true">
+    <apex:pageBlock title = "Greetings!">
+        <apex:pageBlockSection title="World Greeting!">
+            <p>Hello World!</p>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Galaxy Greeting!">
+            <p>Hello Galaxy!</p>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Universe Greeting!">
+            <p>Hello Universe!</p>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Personal Greeting!">
+            <p>Hello {!$User.FirstName} from {!$User.CompanyName}!</p>
+        </apex:pageBlockSection>
+
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Notify of Expiring Position</name>
+    <style>none</style>
+    <subject>The {!Position__c.Name} is open and Due Date is approaching.</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

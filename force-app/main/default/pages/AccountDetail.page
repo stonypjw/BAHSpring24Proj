@@ -1,0 +1,6 @@
+<apex:page standardController="Account" lightningStylesheets="true">
+    <c:disclaimer level="1" recordName="{!Account.Name}"></c:disclaimer>
+    <apex:detail title="Account Detail" subject="{!account.Id}" relatedList="true" inlineEdit="true">
+    </apex:detail>
+    
+</apex:page>

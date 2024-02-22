@@ -1,0 +1,69 @@
+<apex:page StandardController="Invoice__c" recordSetVar="Invoices" 
+            extensions="InvoiceController" lightningStylesheets="true" >
+    <apex:form>
+        <apex:pageBlock id="summaryButtons">
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton action="{!showMonthly}" value="Show Monthly Payments" id="monthly"  />  
+                <apex:commandButton action="{!showQuarterly}" value="Show Quarterly Payments" id="quarterly" /> 
+                <apex:commandButton id="saveButton" action="{!save}" value="Save" disabled="{!disableSaveBtn}"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/> 
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        <apex:PageBlock title="Payment Summary">
+            <apex:outputPanel id="summary">
+                <apex:pageBlockSection columns="3">
+                    <apex:pageBlockSectionItem>
+                        Expected Total Amount: {!o.Amount}
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem>
+                        Current Payment Total: {!totalInvoices}
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem>
+                        <!---Make the variance easy to see, red if not 0, green if 0 -->
+                        Variance:
+                        <font color="{!fontClr}" >
+                            {!invoiceRemainder}
+                        </font>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:pageBlock>
+            <apex:pageBlockTable value="{!newInvoices}" var="inv" >
+                <!---Show Data for Invoices -->
+                <apex:column headerValue="Invoice Name" >
+                    <apex:outputLink value="/{!inv.Id}" target="_blank">
+                        {!inv.Name}
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column value="{!inv.Account__c}"/>
+                <apex:column value="{!inv.Opportunity__c}"/>                
+                <apex:column headerValue="Amount" id="amt">
+                    <apex:outputField value="{!inv.Amount__c}" rendered="{!inv.Paid__c}">
+                        <apex:actionSupport event="onchange" action="{!reclacTotalInvoices}" rerender="summary, saveButton, amt"></apex:actionSupport>
+                        <apex:inlineEditSupport disabled="{!inv.Paid__c}"></apex:inlineEditSupport>
+                    </apex:outputField>
+                    <apex:inputField value="{!inv.Amount__c}" rendered="{!NOT(inv.Paid__c)}">
+                        <apex:actionSupport event="onchange" action="{!reclacTotalInvoices}" rerender="summary, saveButton, amt"></apex:actionSupport>
+                    </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Due Date" id="duedate">
+                    <apex:outputField value="{!inv.Due_Date__c}" rendered="{!inv.Paid__c}">
+                        <apex:actionSupport event="onchange" action="{!reclacTotalInvoices}" rerender="summary, saveButton, duedate"></apex:actionSupport>
+                        <apex:inlineEditSupport disabled="{!inv.Paid__c}"></apex:inlineEditSupport>
+                    </apex:outputField>
+                    <apex:inputField value="{!inv.Due_Date__c}" rendered="{!NOT(inv.Paid__c)}">
+                        <apex:actionSupport event="onchange" rerender="summary, saveButton, duedate" />   
+                    </apex:inputField>
+                </apex:column>
+                <apex:column headerValue="Paid" id="paid">
+                    <apex:outputField value="{!inv.Paid__c}" rendered="{!inv.Paid__c}">
+                        <apex:actionSupport event="onchange" action="{!reclacTotalInvoices}" rerender="summary, saveButton, paid"></apex:actionSupport>
+                        <apex:inlineEditSupport disabled="{!inv.Paid__c}"></apex:inlineEditSupport>
+                    </apex:outputField>
+                    <apex:inputField value="{!inv.Paid__c}" rendered="{!NOT(inv.Paid__c)}"/>
+                </apex:column>                
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

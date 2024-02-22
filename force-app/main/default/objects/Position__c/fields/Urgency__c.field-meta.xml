@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Urgency__c</fullName>
+    <externalId>false</externalId>
+    <formula>IMAGE(
+	IF(Num_Days_til_Due__c&lt;14, &quot;/img/samples/flag_red.gif&quot;,
+		IF(Num_Days_til_Due__c &lt; 30, &quot;/img/samples/flag_yellow.gif&quot;,
+		&quot;/img/samples/flag_green.gif&quot;)
+	)
+	, &quot;No&quot;
+)</formula>
+    <label>Urgency</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+Dear {!Position__c.Hiring_Manager__c}:
+
+You are the Hiring Manager for the following position:
+{!Position__c.Name} position.
+
+The position is currently open and muse be filled prior to:
+{!Position__c.Due_Date__c}.
+
+Click here for more details: {!Position__c.Link}
